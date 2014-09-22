@@ -788,4 +788,247 @@ sieve = (num)->
 
 # console.log digit_five_powers()
 
-start_problem(31)
+# problem 31 1349 ms with brute force
+# problem 31 2 ms with brute force
+# start_problem(31)
+# coins_sum = (value)->
+#   coin_values = [200, 100, 50, 20, 10, 5, 2, 1 ]
+#   cache = {}
+#   num_coins_combination = (index, coins_values, sum, target_value) ->
+#     if index > coins_values.length-1 then return 0     
+#     if sum is target_value 
+#       return 1 
+#     else if sum > target_value 
+#       return 0 
+#     else 
+#       [index..coins_values.length-1].reduce (memo, ele) ->
+#         index = (target_value-sum).toString() + '_' + coins_values[ele].toString()
+#         cache[index] = cache[index] || num_coins_combination(ele, coins_values, sum+coins_values[ele], target_value)
+#         memo += cache[index]
+#       , 0
+#   num_coins_combination(0, coin_values, 0, value)
+
+# console.log coins_sum(200)
+
+# start_problem(32)
+
+# pandigital_products = ->
+#   is_pandigital = (plier, plicand) ->
+#     prod = plier*plicand
+#     result = prod.toString().split('').concat(plier.toString().split('') ).concat(plicand.toString().split(''))
+#     for digit in ['1','2','3','4','5','6','7','8','9']
+#       return false if result.indexOf(digit) is -1
+#     result.length is 9
+
+#   results = []
+#   for plier in [0..99]
+#     for plicand in [99..9999]
+#       prod = plier * plicand
+#       results.push(prod) if is_pandigital(plier, plicand) and results.indexOf(prod) is -1
+
+#   results.reduce (memo, ele) -> 
+#     memo += ele
+#   ,0
+
+# console.log pandigital_products()
+
+# start_problem(33)
+# digit_cancelling_fractions = ->
+#   number_to_array = (num) -> num.toString().split('')
+#   is_cancelling_fraction = (num,den) ->
+#     return false if num >= den or num %10 is 0 or den%10 is 0
+#     initial_result = num/den
+#     num_array = number_to_array(num)
+#     den_array = number_to_array(den)
+#     for ele,num_index in num_array
+#       den_index = den_array.indexOf(ele)
+#       if den_index isnt -1
+#         num_array.splice(num_index, 1)
+#         den_array.splice(den_index, 1)
+#         return [num_array[0], den_array[0]] if num_array[0]/den_array[0] is initial_result
+#     false
+#   results = []
+#   for num in [11..99]
+#     for den in [11..99]
+#       results.push(is_cancelling_fraction(num, den)) if is_cancelling_fraction(num, den)
+  
+#   mult_den = 1
+#   mult_num = 1
+
+#   for ele in results
+#     mult_num = mult_num*ele[0]
+#     mult_den = mult_den*ele[1]
+    
+#   mult_den / mult_num
+
+# console.log digit_cancelling_fractions()
+
+# start_problem(34)
+# initial_time = new Date().getTime()
+# digit_factorials = ->
+#   factorial_cache = {}
+#   factorial = (num)->
+#     pure_factorial = (num)->
+#       return 1 if num is 1 or num is 0
+#       num * factorial(num-1)    
+#     # pure_factorial(num)
+#     factorial_cache[num] = factorial_cache[num] || pure_factorial(num)
+#     factorial_cache[num]
+#   sum_factorial = (num) ->
+#     num.toString().split('').reduce (memo, ele) -> 
+#       memo += factorial(parseInt(ele))
+#     ,0
+
+#   curious_num = (num) -> num is sum_factorial(num)
+#   [10..2540161].reduce (memo, ele) ->
+#     memo += ele if curious_num(ele)
+#     memo
+#   ,0
+
+# console.log digit_factorials()
+# final_time = new Date().getTime()
+# console.log  final_time - initial_time
+
+# start_problem(35)
+
+# circular_primes = (num) ->
+#   primes = sieve(num)
+#   all_circular_numbers = (num) ->
+#     all_nums = []
+#     num_string = num.toString()
+#     num_length = num_string.length
+#     for index in [0..num_length-1]
+#       new_list_string = num_string.substring(index,num_length) + num_string.substring(0,index)
+#       all_nums.push(new_list_string)
+#     all_nums
+#   circular_prime = (num) ->
+#     circular = all_circular_numbers(num)
+#     circular.length == circular.filter((ele) -> primes.indexOf(parseInt(ele)) isnt -1 ).length
+
+#   primes.reduce (memo, ele) -> 
+#     memo++ if circular_prime ele
+#     memo
+#   ,0
+
+
+# console.log circular_primes(1000000)
+
+# start_problem(36)
+# dobule_base_palindrome = (num)->  
+#   sum = 0
+#   is_palindrome = (string) -> string is string.split('').reverse().join('')
+#   for ele in [0..num-1]
+#     sum += ele if is_palindrome(ele.toString()) and is_palindrome(ele.toString(2))
+
+#   sum
+
+# console.log dobule_base_palindrome 1000000
+
+# start_problem(37)
+# truncable_primes = ->  
+#   sum = 0
+#   primes = sieve(1000000)
+#   truncable = (num) ->
+#     return false if primes.indexOf(num) is -1 or num < 10
+#     num_right = num
+#     num_left = num
+#     while num_left  isnt 0
+#       return false if primes.indexOf(num_left) is -1
+#       num_left = Math.floor(num_left/10)
+#     while num_right  isnt 0
+#       return false if primes.indexOf(num_right) is -1
+#       num_right = num_right%(Math.pow(10, num_right.toString().split('').length-1))
+#     true
+
+#   results = []
+#   for prime in primes
+#     results.push()
+#     sum += prime if truncable prime
+
+#   sum
+
+# console.log truncable_primes()
+
+# start_problem(38)
+
+# pandigital_multiples = ->
+#   pandigital_multiple = (num) ->
+#     result_string = ''
+#     counter = 1
+#     while result_string.length<10
+#       result_string += (num*counter).toString()
+#       if result_string.length is 9 and counter > 1
+#         for digit in ['1','2','3','4','5','6','7','8','9']
+#           return false if result_string.indexOf(digit) is -1        
+#         return parseInt result_string
+#       counter++
+#     false
+
+#   max = 0
+#   for ele in [2..9999]
+#     new_ele = pandigital_multiple(ele)
+#     max = Math.max(max, new_ele) if new_ele
+#     console.log max if new_ele
+#   max
+
+# console.log pandigital_multiples()
+
+start_problem 39
+integer_right_triangle = ->
+  perimeter_storage = {}
+
+  hipotenuse = (a,b)-> Math.sqrt(Math.pow(a,2) + Math.pow(b,2))
+  num_if_int = (num) -> if Math.floor(num) is num then return num else return false
+  perimeter = (a,b,c) -> a+b+c
+
+  for a in [1..333]
+    for b in [a..500]
+      hip = hipotenuse(a,b)
+      per = perimeter(a,b, hip)
+      break if per > 1000
+      if num_if_int(hip) then perimeter_storage[per] = perimeter_storage[per] + 1 || 1
+
+
+  max = 0
+  result = null
+  for key in Object.keys(perimeter_storage)
+    if perimeter_storage[key]>max 
+      result = key
+      max = perimeter_storage[key]
+
+  result
+
+
+
+console.log integer_right_triangle()
+# start_problem 40
+# champernowne_constant = ->
+#   changing_num_dig = []
+#   counter = 0
+#   for ele in [1..6]
+#     upper_limit = Math.pow(10,ele)-1
+#     lower_limit = Math.pow(10,ele-1)-1
+#     counter += ( upper_limit - lower_limit )*ele
+#     changing_num_dig.push counter
+#   get_digit = (num) ->
+#     for ele, index in changing_num_dig
+#       if ele > num
+#         if index > 0 then position = (num - changing_num_dig[index-1])-1 else position = num-1
+#         new_num = Math.pow(10,index )+Math.floor(position/(index+1))
+#         new_location = (position)%(index+1)
+#         return parseInt(new_num.toString().split('')[new_location])
+
+#   result = []
+#   for ele in [1,10,100,1000,10000,100000,1000000]
+#     result.push(get_digit(ele))
+#   result.reduce (memo, ele) ->
+#     memo *= ele
+#   , 1
+  
+# console.log champernowne_constant()
+
+
+
+
+
+
