@@ -505,34 +505,490 @@ def sieve(num):
 # print first_thousand_fib()
 
 
-start_problem(25)
-start_problem(26)
-start_problem(27)
-start_problem(28)
-start_problem(29)
-start_problem(30)
-start_problem(31)
-start_problem(32)
-start_problem(33)
-start_problem(34)
-start_problem(35)
-start_problem(36)
-start_problem(37)
-start_problem(38)
-start_problem(39)
-start_problem(40)
-start_problem(41)
-start_problem(42)
-start_problem(43)
-start_problem(44)
-start_problem(45)
-start_problem(46)
-start_problem(47)
-start_problem(48)
+# start_problem(26)
+# def biggest_reciprocal_cycle(num):
+#   def recurring_cycle_length(n):
+#     if n%2 == 0 or n%5 == 0:
+#       return 0 
+#     reminder = 10%n
+#     counter = 1
+#     z = n
+#     while reminder != 1:
+#       reminder = (reminder*10) %n
+#       counter += 1
+#     return counter
+
+#   max_result = 0
+#   result = 2
+#   for ele in sieve(num):
+#     result = max( (result, ele), key=recurring_cycle_length)
+#   return result
+
+# print biggest_reciprocal_cycle(1000)
+
+# start_problem(27)
+# import time,math
+# a = time.time()
+# def quadratic_primes():
+#   def is_prime(n):
+#     if n < 2:
+#       return False
+#     sqrt = math.sqrt(n)
+#     for i in range(2, int(sqrt) + 1):
+#       if n % i == 0:
+#         return False
+#     return True
+
+#   def succ_primes(b, c):
+#     a = 0
+#     while is_prime(a**2 + b*a + c):
+#       a +=1
+#     return a
+
+#   result = 0
+#   max_succ_primes = 0
+#   for c in sieve(1000):
+#     for b in sieve(1000):
+#       b += -c -1
+#       new_succ_primes = succ_primes(b, c)
+#       if new_succ_primes > max_succ_primes:
+#         max_succ_primes = new_succ_primes
+#         result = c * b
+#   return result
+
+# print quadratic_primes()
+# print time.time() - a
+
+# start_problem(28)
+# def number_spiral_diagonals(num):
+#   iter_num = (num-1)/2
+#   summatory = 2
+#   diag = 1
+#   result = 1
+#   for iter in xrange(1,iter_num+1):
+#     for num in xrange(0,4):
+#       diag += summatory
+#       result += diag
+#     summatory +=2
+#   return result
+
+# print number_spiral_diagonals(1001)
+
+# start_problem(29)
+# def distinct_powers(n):
+#   return len(set( [i**j for i in range(2,n+1) for j in range(2,n+1)] ))
+# print distinct_powers(100)
+
+# start_problem(30)
+# def digit_five_powers():
+#   def is_sum_of_fifth_power(num):
+#     return num == reduce( lambda memo, ele : memo + int(ele)**5, str(num), 0 ) 
+#   #upper limit is Math.pow(9,5)*6 => There is no 6 dig number with a bigger sum_power than this
+#   return reduce( lambda memo, ele : memo + ele if is_sum_of_fifth_power(ele) else memo, range(2,354294), 0 )
+
+# print digit_five_powers()
+
+# start_problem(31)
+# def coins_sum(value):
+#   coin_values = [200, 100, 50, 20, 10, 5, 2, 1 ]
+
+#   def num_coins_combination(index, coins_values, curr_sum, target_value):
+#     if index > len(coins_values)-1 or curr_sum > target_value:
+#       return 0     
+#     elif curr_sum == target_value:
+#       return 1 
+#     else:
+#       return reduce( lambda memo, ele: memo + num_coins_combination(ele, coins_values, curr_sum+coins_values[ele], target_value)  , range(index,len(coins_values) ), 0 )
+        
+#   return num_coins_combination(0, coin_values, 0, value)
+# print coins_sum(200)
+
+# start_problem(32)
+# def pandigital_products():
+#   def is_pandigital(plier, plicand):
+#     prod = plier*plicand
+#     result = str(plier*plicand)+ str(plier)+ str(plicand)
+#     for digit in ['1','2','3','4','5','6','7','8','9']:
+#       if digit not in result:
+#         return False 
+#     return prod if len(result) == 9 else False
+
+#   results = [is_pandigital(plier, plicand) for plier in xrange(0,100) for plicand in xrange(99,10000)]
+
+#   return reduce(lambda memo, ele: memo+ ele, set(filter( lambda ele : ele , results)), 0)
+
+# print pandigital_products()
+
+
+# start_problem(33)
+# def digit_cancelling_fractions():
+#   def is_cancelling_fraction(num,den):
+#     if num >= den or num %10 == 0 or den%10 == 0:
+#       return False 
+#     initial_result = num*1.0/den
+#     for char in str(num):
+#       if char in str(den):
+#         num_char = int(str(num).replace(char, '', 1))
+#         den_char = int(str(den).replace(char, '', 1))
+#         if num_char*1.0/den_char == initial_result:
+#           return [num_char, den_char] 
+#     return False
+  
+#   results = [is_cancelling_fraction(num, den) for num in xrange(11,100) for den in xrange(11,100) if is_cancelling_fraction(num, den) != False]
+  
+#   mult_den, mult_num = 1, 1
+
+#   for ele in results:
+#     mult_num = mult_num*ele[0]
+#     mult_den = mult_den*ele[1]
+    
+#   return mult_den / mult_num
+
+# print digit_cancelling_fractions()
+
+# start_problem(34)
+# import math
+# def digit_factorials():  
+#   sum_factorial = lambda num: reduce (lambda memo, ele: memo + math.factorial(int(ele)), str(num), 0)  
+#   curious_num = lambda num: num == sum_factorial(num)
+#   return reduce(lambda memo, ele: memo + ele if curious_num(ele) else memo , range(10,2540161) , 0)
+
+# print digit_factorials()
+
+# start_problem(35)
+# import math
+# def circular_primes(num):
+#   primes = sieve(num)
+#   def is_prime(n):
+#     if n < 2:
+#       return False
+#     sqrt = math.sqrt(n)
+#     for i in range(2, int(sqrt) + 1):
+#       if n % i == 0:
+#         return False
+#     return True
+#   def all_circular_numbers(num):
+#     all_nums = []
+#     num_string = str(num)
+#     num_length = len(num_string)
+#     for index in range(0,len(num_string)):
+#       new_num = num_string[index:num_length] + num_string[:index]
+#       all_nums.append(new_num)
+#     return all_nums
+#   circular_prime = lambda num : len(all_circular_numbers(num)) == len(filter( lambda ele : is_prime(int(ele)), all_circular_numbers(num)))
+
+#   return reduce(lambda memo, ele: memo + 1 if circular_prime(ele) else memo, primes, 0)
+
+# print circular_primes(1000000)
+
+# start_problem(36)
+
+# def dobule_base_palindrome(num):  
+#   return reduce( lambda memo, ele: memo + ele if str(ele) == str(ele)[::-1] and bin(ele)[2:] == bin(ele)[2:][::-1] else memo,  xrange(0,num), 0)
+
+# print dobule_base_palindrome(1000000)
+
+# start_problem(37)
+# import math
+# def truncable_primes():
+#   primes = sieve(1000000)
+#   def is_prime(n):
+#     if n < 2:
+#       return False
+#     sqrt = math.sqrt(n)
+#     for i in range(2, int(sqrt) + 1):
+#       if n % i == 0:
+#         return False
+#     return True
+#   def truncable(num):
+#     if not is_prime(num) or num < 10:
+#       return False 
+#     num_right = num
+#     num_left = num
+#     while num_left != 0:      
+#       if not is_prime(num_left):
+#         return False 
+#       num_left = num_left//10
+#     while num_right != 0:
+#       if not is_prime(num_right):
+#         return False 
+#       num_right = num_right%(10**(len(str(num_right))-1))
+#     return True
+
+#   return reduce(lambda memo, ele: memo + ele if truncable(ele) else memo, primes, 0 )
+
+# print truncable_primes()
+
+
+# start_problem(38)
+# def pandigital_multiples():
+#   def pandigital_multiple(num):
+#     result_string = ''
+#     counter = 1
+#     while len(result_string)<10:
+#       result_string += str(num*counter)
+#       if len(result_string) == 9 and counter > 1:
+#         for digit in ['1','2','3','4','5','6','7','8','9']:
+#           if not digit in result_string:
+#             return False 
+#         return int(result_string)
+#       counter += 1
+#     return False
+
+#   return reduce(lambda memo, ele: max(memo, pandigital_multiple(ele) ) if pandigital_multiple(ele) else memo, xrange(2,9999), 0)
+
+# print pandigital_multiples()
+
+# start_problem(39)
+# import math
+# def integer_right_triangle():
+#   perimeter_storage = {}
+
+#   hipotenuse = lambda a,b : math.sqrt(a**2 + b**2)
+#   num_if_int = lambda num: num if math.floor(num) == num  else False
+#   perimeter = lambda a,b,c: a+b+c
+
+#   for a in xrange(1,333):
+#     for b in xrange(a,500):
+#       hip = hipotenuse(a,b)
+#       per = perimeter(a,b, hip)
+#       if per > 1000:
+#         break 
+#       if num_if_int(hip):        
+#         perimeter_storage[per] = perimeter_storage[per] + 1 if per in perimeter_storage.keys() else 1
+
+#   return int(max(perimeter_storage.keys(), key= lambda key : perimeter_storage[key]))
+
+# print integer_right_triangle()
+
+# start_problem(40)
+# def champernowne_constant():
+#   changing_num_dig = []
+#   counter = 0
+#   for ele in range(1,7):
+#     upper_limit = 10**ele - 1
+#     lower_limit = (10**(ele-1))-1
+#     counter += ( upper_limit - lower_limit )*ele
+#     changing_num_dig.append(counter)
+#   def get_digit(num):    
+#     for i, ele in enumerate(changing_num_dig):
+#       if ele > num:
+#         position = (num - changing_num_dig[i-1])-1 if i > 0 else num-1
+#         new_num = 10**i + position//(i+1)
+#         new_location = position%(i+1)        
+#         return int(str(new_num)[new_location])
+
+#   result = [ get_digit(ele) for ele in [1,10,100,1000,10000,100000,1000000] ]
+    
+#   return reduce(lambda memo, ele : memo *ele , result, 1)
+    
+# print champernowne_constant()
+
+# start_problem(41)
+# def pandigital_prime():
+#   primes = sieve (10000000)
+#   is_pandigital = lambda num : all([ str(digit) in str(num) for digit in range(1,len(str(num)) + 1) ] )
+#   return reduce( lambda memo, ele: ele if is_pandigital(ele) else memo, primes )
+
+
+# print pandigital_prime()
+
+# start_problem(42)
+# def coded_triangle_nums(arguments):
+#   letter_to_digit = {'A':1,'B':2,'C':3,'D':4,'E':5,'F':6,'G':7,'H':8,'I':9,'J':10,'K':11,'L':12,'M':13,'N':14,'O':15,'P':16,'Q':17,'R':18,'S':19,'T':20,'U':21,'V':22,'W':23,'X':24,'Y':25,'Z':26}  
+#   counter = 0
+#   string_to_num = lambda string: reduce(lambda memo, ele: memo + letter_to_digit[ele], string, 0)    
+#   triangle_of_num = lambda num : 0.5*num*(num+1)
+#   triangle_values = [ triangle_of_num(num) for num in xrange(1,101) ]
+
+#   return reduce(lambda memo, ele: memo + 1 if string_to_num(ele) in triangle_values else memo, arguments , 0)
+
+# print coded_triangle_nums(["A","ABILITY","ABLE","ABOUT","ABOVE","ABSENCE","ABSOLUTELY","ACADEMIC","ACCEPT","ACCESS","ACCIDENT","ACCOMPANY","ACCORDING","ACCOUNT","ACHIEVE","ACHIEVEMENT","ACID","ACQUIRE","ACROSS","ACT","ACTION","ACTIVE","ACTIVITY","ACTUAL","ACTUALLY","ADD","ADDITION","ADDITIONAL","ADDRESS","ADMINISTRATION","ADMIT","ADOPT","ADULT","ADVANCE","ADVANTAGE","ADVICE","ADVISE","AFFAIR","AFFECT","AFFORD","AFRAID","AFTER","AFTERNOON","AFTERWARDS","AGAIN","AGAINST","AGE","AGENCY","AGENT","AGO","AGREE","AGREEMENT","AHEAD","AID","AIM","AIR","AIRCRAFT","ALL","ALLOW","ALMOST","ALONE","ALONG","ALREADY","ALRIGHT","ALSO","ALTERNATIVE","ALTHOUGH","ALWAYS","AMONG","AMONGST","AMOUNT","AN","ANALYSIS","ANCIENT","AND","ANIMAL","ANNOUNCE","ANNUAL","ANOTHER","ANSWER","ANY","ANYBODY","ANYONE","ANYTHING","ANYWAY","APART","APPARENT","APPARENTLY","APPEAL","APPEAR","APPEARANCE","APPLICATION","APPLY","APPOINT","APPOINTMENT","APPROACH","APPROPRIATE","APPROVE","AREA","ARGUE","ARGUMENT","ARISE","ARM","ARMY","AROUND","ARRANGE","ARRANGEMENT","ARRIVE","ART","ARTICLE","ARTIST","AS","ASK","ASPECT","ASSEMBLY","ASSESS","ASSESSMENT","ASSET","ASSOCIATE","ASSOCIATION","ASSUME","ASSUMPTION","AT","ATMOSPHERE","ATTACH","ATTACK","ATTEMPT","ATTEND","ATTENTION","ATTITUDE","ATTRACT","ATTRACTIVE","AUDIENCE","AUTHOR","AUTHORITY","AVAILABLE","AVERAGE","AVOID","AWARD","AWARE","AWAY","AYE","BABY","BACK","BACKGROUND","BAD","BAG","BALANCE","BALL","BAND","BANK","BAR","BASE","BASIC","BASIS","BATTLE","BE","BEAR","BEAT","BEAUTIFUL","BECAUSE","BECOME","BED","BEDROOM","BEFORE","BEGIN","BEGINNING","BEHAVIOUR","BEHIND","BELIEF","BELIEVE","BELONG","BELOW","BENEATH","BENEFIT","BESIDE","BEST","BETTER","BETWEEN","BEYOND","BIG","BILL","BIND","BIRD","BIRTH","BIT","BLACK","BLOCK","BLOOD","BLOODY","BLOW","BLUE","BOARD","BOAT","BODY","BONE","BOOK","BORDER","BOTH","BOTTLE","BOTTOM","BOX","BOY","BRAIN","BRANCH","BREAK","BREATH","BRIDGE","BRIEF","BRIGHT","BRING","BROAD","BROTHER","BUDGET","BUILD","BUILDING","BURN","BUS","BUSINESS","BUSY","BUT","BUY","BY","CABINET","CALL","CAMPAIGN","CAN","CANDIDATE","CAPABLE","CAPACITY","CAPITAL","CAR","CARD","CARE","CAREER","CAREFUL","CAREFULLY","CARRY","CASE","CASH","CAT","CATCH","CATEGORY","CAUSE","CELL","CENTRAL","CENTRE","CENTURY","CERTAIN","CERTAINLY","CHAIN","CHAIR","CHAIRMAN","CHALLENGE","CHANCE","CHANGE","CHANNEL","CHAPTER","CHARACTER","CHARACTERISTIC","CHARGE","CHEAP","CHECK","CHEMICAL","CHIEF","CHILD","CHOICE","CHOOSE","CHURCH","CIRCLE","CIRCUMSTANCE","CITIZEN","CITY","CIVIL","CLAIM","CLASS","CLEAN","CLEAR","CLEARLY","CLIENT","CLIMB","CLOSE","CLOSELY","CLOTHES","CLUB","COAL","CODE","COFFEE","COLD","COLLEAGUE","COLLECT","COLLECTION","COLLEGE","COLOUR","COMBINATION","COMBINE","COME","COMMENT","COMMERCIAL","COMMISSION","COMMIT","COMMITMENT","COMMITTEE","COMMON","COMMUNICATION","COMMUNITY","COMPANY","COMPARE","COMPARISON","COMPETITION","COMPLETE","COMPLETELY","COMPLEX","COMPONENT","COMPUTER","CONCENTRATE","CONCENTRATION","CONCEPT","CONCERN","CONCERNED","CONCLUDE","CONCLUSION","CONDITION","CONDUCT","CONFERENCE","CONFIDENCE","CONFIRM","CONFLICT","CONGRESS","CONNECT","CONNECTION","CONSEQUENCE","CONSERVATIVE","CONSIDER","CONSIDERABLE","CONSIDERATION","CONSIST","CONSTANT","CONSTRUCTION","CONSUMER","CONTACT","CONTAIN","CONTENT","CONTEXT","CONTINUE","CONTRACT","CONTRAST","CONTRIBUTE","CONTRIBUTION","CONTROL","CONVENTION","CONVERSATION","COPY","CORNER","CORPORATE","CORRECT","COS","COST","COULD","COUNCIL","COUNT","COUNTRY","COUNTY","COUPLE","COURSE","COURT","COVER","CREATE","CREATION","CREDIT","CRIME","CRIMINAL","CRISIS","CRITERION","CRITICAL","CRITICISM","CROSS","CROWD","CRY","CULTURAL","CULTURE","CUP","CURRENT","CURRENTLY","CURRICULUM","CUSTOMER","CUT","DAMAGE","DANGER","DANGEROUS","DARK","DATA","DATE","DAUGHTER","DAY","DEAD","DEAL","DEATH","DEBATE","DEBT","DECADE","DECIDE","DECISION","DECLARE","DEEP","DEFENCE","DEFENDANT","DEFINE","DEFINITION","DEGREE","DELIVER","DEMAND","DEMOCRATIC","DEMONSTRATE","DENY","DEPARTMENT","DEPEND","DEPUTY","DERIVE","DESCRIBE","DESCRIPTION","DESIGN","DESIRE","DESK","DESPITE","DESTROY","DETAIL","DETAILED","DETERMINE","DEVELOP","DEVELOPMENT","DEVICE","DIE","DIFFERENCE","DIFFERENT","DIFFICULT","DIFFICULTY","DINNER","DIRECT","DIRECTION","DIRECTLY","DIRECTOR","DISAPPEAR","DISCIPLINE","DISCOVER","DISCUSS","DISCUSSION","DISEASE","DISPLAY","DISTANCE","DISTINCTION","DISTRIBUTION","DISTRICT","DIVIDE","DIVISION","DO","DOCTOR","DOCUMENT","DOG","DOMESTIC","DOOR","DOUBLE","DOUBT","DOWN","DRAW","DRAWING","DREAM","DRESS","DRINK","DRIVE","DRIVER","DROP","DRUG","DRY","DUE","DURING","DUTY","EACH","EAR","EARLY","EARN","EARTH","EASILY","EAST","EASY","EAT","ECONOMIC","ECONOMY","EDGE","EDITOR","EDUCATION","EDUCATIONAL","EFFECT","EFFECTIVE","EFFECTIVELY","EFFORT","EGG","EITHER","ELDERLY","ELECTION","ELEMENT","ELSE","ELSEWHERE","EMERGE","EMPHASIS","EMPLOY","EMPLOYEE","EMPLOYER","EMPLOYMENT","EMPTY","ENABLE","ENCOURAGE","END","ENEMY","ENERGY","ENGINE","ENGINEERING","ENJOY","ENOUGH","ENSURE","ENTER","ENTERPRISE","ENTIRE","ENTIRELY","ENTITLE","ENTRY","ENVIRONMENT","ENVIRONMENTAL","EQUAL","EQUALLY","EQUIPMENT","ERROR","ESCAPE","ESPECIALLY","ESSENTIAL","ESTABLISH","ESTABLISHMENT","ESTATE","ESTIMATE","EVEN","EVENING","EVENT","EVENTUALLY","EVER","EVERY","EVERYBODY","EVERYONE","EVERYTHING","EVIDENCE","EXACTLY","EXAMINATION","EXAMINE","EXAMPLE","EXCELLENT","EXCEPT","EXCHANGE","EXECUTIVE","EXERCISE","EXHIBITION","EXIST","EXISTENCE","EXISTING","EXPECT","EXPECTATION","EXPENDITURE","EXPENSE","EXPENSIVE","EXPERIENCE","EXPERIMENT","EXPERT","EXPLAIN","EXPLANATION","EXPLORE","EXPRESS","EXPRESSION","EXTEND","EXTENT","EXTERNAL","EXTRA","EXTREMELY","EYE","FACE","FACILITY","FACT","FACTOR","FACTORY","FAIL","FAILURE","FAIR","FAIRLY","FAITH","FALL","FAMILIAR","FAMILY","FAMOUS","FAR","FARM","FARMER","FASHION","FAST","FATHER","FAVOUR","FEAR","FEATURE","FEE","FEEL","FEELING","FEMALE","FEW","FIELD","FIGHT","FIGURE","FILE","FILL","FILM","FINAL","FINALLY","FINANCE","FINANCIAL","FIND","FINDING","FINE","FINGER","FINISH","FIRE","FIRM","FIRST","FISH","FIT","FIX","FLAT","FLIGHT","FLOOR","FLOW","FLOWER","FLY","FOCUS","FOLLOW","FOLLOWING","FOOD","FOOT","FOOTBALL","FOR","FORCE","FOREIGN","FOREST","FORGET","FORM","FORMAL","FORMER","FORWARD","FOUNDATION","FREE","FREEDOM","FREQUENTLY","FRESH","FRIEND","FROM","FRONT","FRUIT","FUEL","FULL","FULLY","FUNCTION","FUND","FUNNY","FURTHER","FUTURE","GAIN","GAME","GARDEN","GAS","GATE","GATHER","GENERAL","GENERALLY","GENERATE","GENERATION","GENTLEMAN","GET","GIRL","GIVE","GLASS","GO","GOAL","GOD","GOLD","GOOD","GOVERNMENT","GRANT","GREAT","GREEN","GREY","GROUND","GROUP","GROW","GROWING","GROWTH","GUEST","GUIDE","GUN","HAIR","HALF","HALL","HAND","HANDLE","HANG","HAPPEN","HAPPY","HARD","HARDLY","HATE","HAVE","HE","HEAD","HEALTH","HEAR","HEART","HEAT","HEAVY","HELL","HELP","HENCE","HER","HERE","HERSELF","HIDE","HIGH","HIGHLY","HILL","HIM","HIMSELF","HIS","HISTORICAL","HISTORY","HIT","HOLD","HOLE","HOLIDAY","HOME","HOPE","HORSE","HOSPITAL","HOT","HOTEL","HOUR","HOUSE","HOUSEHOLD","HOUSING","HOW","HOWEVER","HUGE","HUMAN","HURT","HUSBAND","I","IDEA","IDENTIFY","IF","IGNORE","ILLUSTRATE","IMAGE","IMAGINE","IMMEDIATE","IMMEDIATELY","IMPACT","IMPLICATION","IMPLY","IMPORTANCE","IMPORTANT","IMPOSE","IMPOSSIBLE","IMPRESSION","IMPROVE","IMPROVEMENT","IN","INCIDENT","INCLUDE","INCLUDING","INCOME","INCREASE","INCREASED","INCREASINGLY","INDEED","INDEPENDENT","INDEX","INDICATE","INDIVIDUAL","INDUSTRIAL","INDUSTRY","INFLUENCE","INFORM","INFORMATION","INITIAL","INITIATIVE","INJURY","INSIDE","INSIST","INSTANCE","INSTEAD","INSTITUTE","INSTITUTION","INSTRUCTION","INSTRUMENT","INSURANCE","INTEND","INTENTION","INTEREST","INTERESTED","INTERESTING","INTERNAL","INTERNATIONAL","INTERPRETATION","INTERVIEW","INTO","INTRODUCE","INTRODUCTION","INVESTIGATE","INVESTIGATION","INVESTMENT","INVITE","INVOLVE","IRON","IS","ISLAND","ISSUE","IT","ITEM","ITS","ITSELF","JOB","JOIN","JOINT","JOURNEY","JUDGE","JUMP","JUST","JUSTICE","KEEP","KEY","KID","KILL","KIND","KING","KITCHEN","KNEE","KNOW","KNOWLEDGE","LABOUR","LACK","LADY","LAND","LANGUAGE","LARGE","LARGELY","LAST","LATE","LATER","LATTER","LAUGH","LAUNCH","LAW","LAWYER","LAY","LEAD","LEADER","LEADERSHIP","LEADING","LEAF","LEAGUE","LEAN","LEARN","LEAST","LEAVE","LEFT","LEG","LEGAL","LEGISLATION","LENGTH","LESS","LET","LETTER","LEVEL","LIABILITY","LIBERAL","LIBRARY","LIE","LIFE","LIFT","LIGHT","LIKE","LIKELY","LIMIT","LIMITED","LINE","LINK","LIP","LIST","LISTEN","LITERATURE","LITTLE","LIVE","LIVING","LOAN","LOCAL","LOCATION","LONG","LOOK","LORD","LOSE","LOSS","LOT","LOVE","LOVELY","LOW","LUNCH","MACHINE","MAGAZINE","MAIN","MAINLY","MAINTAIN","MAJOR","MAJORITY","MAKE","MALE","MAN","MANAGE","MANAGEMENT","MANAGER","MANNER","MANY","MAP","MARK","MARKET","MARRIAGE","MARRIED","MARRY","MASS","MASTER","MATCH","MATERIAL","MATTER","MAY","MAYBE","ME","MEAL","MEAN","MEANING","MEANS","MEANWHILE","MEASURE","MECHANISM","MEDIA","MEDICAL","MEET","MEETING","MEMBER","MEMBERSHIP","MEMORY","MENTAL","MENTION","MERELY","MESSAGE","METAL","METHOD","MIDDLE","MIGHT","MILE","MILITARY","MILK","MIND","MINE","MINISTER","MINISTRY","MINUTE","MISS","MISTAKE","MODEL","MODERN","MODULE","MOMENT","MONEY","MONTH","MORE","MORNING","MOST","MOTHER","MOTION","MOTOR","MOUNTAIN","MOUTH","MOVE","MOVEMENT","MUCH","MURDER","MUSEUM","MUSIC","MUST","MY","MYSELF","NAME","NARROW","NATION","NATIONAL","NATURAL","NATURE","NEAR","NEARLY","NECESSARILY","NECESSARY","NECK","NEED","NEGOTIATION","NEIGHBOUR","NEITHER","NETWORK","NEVER","NEVERTHELESS","NEW","NEWS","NEWSPAPER","NEXT","NICE","NIGHT","NO","NOBODY","NOD","NOISE","NONE","NOR","NORMAL","NORMALLY","NORTH","NORTHERN","NOSE","NOT","NOTE","NOTHING","NOTICE","NOTION","NOW","NUCLEAR","NUMBER","NURSE","OBJECT","OBJECTIVE","OBSERVATION","OBSERVE","OBTAIN","OBVIOUS","OBVIOUSLY","OCCASION","OCCUR","ODD","OF","OFF","OFFENCE","OFFER","OFFICE","OFFICER","OFFICIAL","OFTEN","OIL","OKAY","OLD","ON","ONCE","ONE","ONLY","ONTO","OPEN","OPERATE","OPERATION","OPINION","OPPORTUNITY","OPPOSITION","OPTION","OR","ORDER","ORDINARY","ORGANISATION","ORGANISE","ORGANIZATION","ORIGIN","ORIGINAL","OTHER","OTHERWISE","OUGHT","OUR","OURSELVES","OUT","OUTCOME","OUTPUT","OUTSIDE","OVER","OVERALL","OWN","OWNER","PACKAGE","PAGE","PAIN","PAINT","PAINTING","PAIR","PANEL","PAPER","PARENT","PARK","PARLIAMENT","PART","PARTICULAR","PARTICULARLY","PARTLY","PARTNER","PARTY","PASS","PASSAGE","PAST","PATH","PATIENT","PATTERN","PAY","PAYMENT","PEACE","PENSION","PEOPLE","PER","PERCENT","PERFECT","PERFORM","PERFORMANCE","PERHAPS","PERIOD","PERMANENT","PERSON","PERSONAL","PERSUADE","PHASE","PHONE","PHOTOGRAPH","PHYSICAL","PICK","PICTURE","PIECE","PLACE","PLAN","PLANNING","PLANT","PLASTIC","PLATE","PLAY","PLAYER","PLEASE","PLEASURE","PLENTY","PLUS","POCKET","POINT","POLICE","POLICY","POLITICAL","POLITICS","POOL","POOR","POPULAR","POPULATION","POSITION","POSITIVE","POSSIBILITY","POSSIBLE","POSSIBLY","POST","POTENTIAL","POUND","POWER","POWERFUL","PRACTICAL","PRACTICE","PREFER","PREPARE","PRESENCE","PRESENT","PRESIDENT","PRESS","PRESSURE","PRETTY","PREVENT","PREVIOUS","PREVIOUSLY","PRICE","PRIMARY","PRIME","PRINCIPLE","PRIORITY","PRISON","PRISONER","PRIVATE","PROBABLY","PROBLEM","PROCEDURE","PROCESS","PRODUCE","PRODUCT","PRODUCTION","PROFESSIONAL","PROFIT","PROGRAM","PROGRAMME","PROGRESS","PROJECT","PROMISE","PROMOTE","PROPER","PROPERLY","PROPERTY","PROPORTION","PROPOSE","PROPOSAL","PROSPECT","PROTECT","PROTECTION","PROVE","PROVIDE","PROVIDED","PROVISION","PUB","PUBLIC","PUBLICATION","PUBLISH","PULL","PUPIL","PURPOSE","PUSH","PUT","QUALITY","QUARTER","QUESTION","QUICK","QUICKLY","QUIET","QUITE","RACE","RADIO","RAILWAY","RAIN","RAISE","RANGE","RAPIDLY","RARE","RATE","RATHER","REACH","REACTION","READ","READER","READING","READY","REAL","REALISE","REALITY","REALIZE","REALLY","REASON","REASONABLE","RECALL","RECEIVE","RECENT","RECENTLY","RECOGNISE","RECOGNITION","RECOGNIZE","RECOMMEND","RECORD","RECOVER","RED","REDUCE","REDUCTION","REFER","REFERENCE","REFLECT","REFORM","REFUSE","REGARD","REGION","REGIONAL","REGULAR","REGULATION","REJECT","RELATE","RELATION","RELATIONSHIP","RELATIVE","RELATIVELY","RELEASE","RELEVANT","RELIEF","RELIGION","RELIGIOUS","RELY","REMAIN","REMEMBER","REMIND","REMOVE","REPEAT","REPLACE","REPLY","REPORT","REPRESENT","REPRESENTATION","REPRESENTATIVE","REQUEST","REQUIRE","REQUIREMENT","RESEARCH","RESOURCE","RESPECT","RESPOND","RESPONSE","RESPONSIBILITY","RESPONSIBLE","REST","RESTAURANT","RESULT","RETAIN","RETURN","REVEAL","REVENUE","REVIEW","REVOLUTION","RICH","RIDE","RIGHT","RING","RISE","RISK","RIVER","ROAD","ROCK","ROLE","ROLL","ROOF","ROOM","ROUND","ROUTE","ROW","ROYAL","RULE","RUN","RURAL","SAFE","SAFETY","SALE","SAME","SAMPLE","SATISFY","SAVE","SAY","SCALE","SCENE","SCHEME","SCHOOL","SCIENCE","SCIENTIFIC","SCIENTIST","SCORE","SCREEN","SEA","SEARCH","SEASON","SEAT","SECOND","SECONDARY","SECRETARY","SECTION","SECTOR","SECURE","SECURITY","SEE","SEEK","SEEM","SELECT","SELECTION","SELL","SEND","SENIOR","SENSE","SENTENCE","SEPARATE","SEQUENCE","SERIES","SERIOUS","SERIOUSLY","SERVANT","SERVE","SERVICE","SESSION","SET","SETTLE","SETTLEMENT","SEVERAL","SEVERE","SEX","SEXUAL","SHAKE","SHALL","SHAPE","SHARE","SHE","SHEET","SHIP","SHOE","SHOOT","SHOP","SHORT","SHOT","SHOULD","SHOULDER","SHOUT","SHOW","SHUT","SIDE","SIGHT","SIGN","SIGNAL","SIGNIFICANCE","SIGNIFICANT","SILENCE","SIMILAR","SIMPLE","SIMPLY","SINCE","SING","SINGLE","SIR","SISTER","SIT","SITE","SITUATION","SIZE","SKILL","SKIN","SKY","SLEEP","SLIGHTLY","SLIP","SLOW","SLOWLY","SMALL","SMILE","SO","SOCIAL","SOCIETY","SOFT","SOFTWARE","SOIL","SOLDIER","SOLICITOR","SOLUTION","SOME","SOMEBODY","SOMEONE","SOMETHING","SOMETIMES","SOMEWHAT","SOMEWHERE","SON","SONG","SOON","SORRY","SORT","SOUND","SOURCE","SOUTH","SOUTHERN","SPACE","SPEAK","SPEAKER","SPECIAL","SPECIES","SPECIFIC","SPEECH","SPEED","SPEND","SPIRIT","SPORT","SPOT","SPREAD","SPRING","STAFF","STAGE","STAND","STANDARD","STAR","START","STATE","STATEMENT","STATION","STATUS","STAY","STEAL","STEP","STICK","STILL","STOCK","STONE","STOP","STORE","STORY","STRAIGHT","STRANGE","STRATEGY","STREET","STRENGTH","STRIKE","STRONG","STRONGLY","STRUCTURE","STUDENT","STUDIO","STUDY","STUFF","STYLE","SUBJECT","SUBSTANTIAL","SUCCEED","SUCCESS","SUCCESSFUL","SUCH","SUDDENLY","SUFFER","SUFFICIENT","SUGGEST","SUGGESTION","SUITABLE","SUM","SUMMER","SUN","SUPPLY","SUPPORT","SUPPOSE","SURE","SURELY","SURFACE","SURPRISE","SURROUND","SURVEY","SURVIVE","SWITCH","SYSTEM","TABLE","TAKE","TALK","TALL","TAPE","TARGET","TASK","TAX","TEA","TEACH","TEACHER","TEACHING","TEAM","TEAR","TECHNICAL","TECHNIQUE","TECHNOLOGY","TELEPHONE","TELEVISION","TELL","TEMPERATURE","TEND","TERM","TERMS","TERRIBLE","TEST","TEXT","THAN","THANK","THANKS","THAT","THE","THEATRE","THEIR","THEM","THEME","THEMSELVES","THEN","THEORY","THERE","THEREFORE","THESE","THEY","THIN","THING","THINK","THIS","THOSE","THOUGH","THOUGHT","THREAT","THREATEN","THROUGH","THROUGHOUT","THROW","THUS","TICKET","TIME","TINY","TITLE","TO","TODAY","TOGETHER","TOMORROW","TONE","TONIGHT","TOO","TOOL","TOOTH","TOP","TOTAL","TOTALLY","TOUCH","TOUR","TOWARDS","TOWN","TRACK","TRADE","TRADITION","TRADITIONAL","TRAFFIC","TRAIN","TRAINING","TRANSFER","TRANSPORT","TRAVEL","TREAT","TREATMENT","TREATY","TREE","TREND","TRIAL","TRIP","TROOP","TROUBLE","TRUE","TRUST","TRUTH","TRY","TURN","TWICE","TYPE","TYPICAL","UNABLE","UNDER","UNDERSTAND","UNDERSTANDING","UNDERTAKE","UNEMPLOYMENT","UNFORTUNATELY","UNION","UNIT","UNITED","UNIVERSITY","UNLESS","UNLIKELY","UNTIL","UP","UPON","UPPER","URBAN","US","USE","USED","USEFUL","USER","USUAL","USUALLY","VALUE","VARIATION","VARIETY","VARIOUS","VARY","VAST","VEHICLE","VERSION","VERY","VIA","VICTIM","VICTORY","VIDEO","VIEW","VILLAGE","VIOLENCE","VISION","VISIT","VISITOR","VITAL","VOICE","VOLUME","VOTE","WAGE","WAIT","WALK","WALL","WANT","WAR","WARM","WARN","WASH","WATCH","WATER","WAVE","WAY","WE","WEAK","WEAPON","WEAR","WEATHER","WEEK","WEEKEND","WEIGHT","WELCOME","WELFARE","WELL","WEST","WESTERN","WHAT","WHATEVER","WHEN","WHERE","WHEREAS","WHETHER","WHICH","WHILE","WHILST","WHITE","WHO","WHOLE","WHOM","WHOSE","WHY","WIDE","WIDELY","WIFE","WILD","WILL","WIN","WIND","WINDOW","WINE","WING","WINNER","WINTER","WISH","WITH","WITHDRAW","WITHIN","WITHOUT","WOMAN","WONDER","WONDERFUL","WOOD","WORD","WORK","WORKER","WORKING","WORKS","WORLD","WORRY","WORTH","WOULD","WRITE","WRITER","WRITING","WRONG","YARD","YEAH","YEAR","YES","YESTERDAY","YET","YOU","YOUNG","YOUR","YOURSELF","YOUTH"])
+
+# start_problem(43)
+# def sub_string_divisibility():
+#   def combination(string):
+#     if len(string) == 1:
+#       return [string] 
+#     first = string[0]
+#     rest = string[1:]
+#     result = []
+#     for comb in combination(rest):
+#       for index in range(0,len(comb)+1):
+#         new_string =  comb[0:index] + first + comb[index:]
+#         result.append(new_string)
+#     return result
+
+#   div_2 = lambda string: int(string[1:4])%2 is 0
+#   div_3 = lambda string: int(string[2:5])%3 is 0
+#   div_5 = lambda string: int(string[3:6])%5 is 0
+#   div_7 = lambda string: int(string[4:7])%7 is 0
+#   div_11 = lambda string: int(string[5:8])%11 is 0
+#   div_13 = lambda string: int(string[6:9])%13 is 0
+#   div_17 = lambda string: int(string[7:10])%17 is 0
+  
+#   return reduce(lambda memo, ele: memo + int(ele) if div_2(ele) and div_3(ele) and div_5(ele) and div_7(ele) and div_11(ele) and div_13(ele) and div_17(ele) else memo, combination('0123456789'), 0 )
+
+# print sub_string_divisibility()
+
+
+# start_problem(44)
+# import math
+# #Very slow
+# def pentagon_numbers():
+#   pentagonal = lambda num: num*(3*num-1)/2
+#   pent_list = [pentagonal(num) for num in range(1,3001)]
+#   result = 100000000
+#   for index, num1 in enumerate(pent_list):
+#     for num2 in pent_list[index:]:
+#       add = num1+num2
+#       diff = abs(num2-num1)
+#       if add in pent_list and diff in pent_list:
+#         result = min(result, diff) 
+
+#   return result
+
+
+# print pentagon_numbers()
+
+# start_problem(45)
+# def triang_pent_hex():
+#   triang = []
+#   pent = []
+#   hexa = []
+#   triangular_num = lambda num : num*(num+1)/2
+#   pent_num = lambda num : num*(3*num-1)/2
+#   hex_num = lambda num : num*(2*num-1)
+#   counter = 1
+#   while counter > 0:
+#     triang.append(triangular_num(counter))
+#     pent.append(pent_num(counter))
+#     hexa.append(hex_num(counter))
+#     if triang[len(triang)-1] in pent and triang[len(triang)-1] in hexa  and counter != 1 and counter != 285:
+#       return triang[len(triang)-1] 
+#     counter +=1
+
+# print triang_pent_hex()
+
+# start_problem(46)
+# def goldbach_conjecture():
+#   primes = sieve(1000000)
+#   def is_goldbach_conjecture(num):
+#     for prime in primes:
+#       if prime > num:
+#         return False
+#       counter = 1
+#       while counter > 0:
+#         goldbach_num = prime + 2*(counter**2)
+#         if goldbach_num == num:
+#           return True
+#         if goldbach_num  > num:
+#           break          
+#         counter +=1
+  
+#   counter = 3
+#   while counter>0:
+#     if counter in primes:
+#       counter += 2
+#     elif not is_goldbach_conjecture(counter):
+#       return counter 
+#     counter+=2
+
+# print goldbach_conjecture()
+
+# start_problem(47)
+# def distinct_prime_factors():
+#   primes = sieve(1000000)
+#   def divisors(num):
+#     result = []
+#     while num > 1:
+#       for ele in primes:
+#         if num == 1:
+#           break 
+#         while num%ele == 0:
+#           if ele not in result:
+#             result.append(ele) 
+#           num /= ele
+#     return result
+#   counter = 1
+#   while counter>0:    
+#     counter += 1    
+#     if len(divisors(counter)) == 4 and len(divisors(counter+1)) == 4 and len(divisors(counter+2)) == 4 and len(divisors(counter+3)) == 4:
+#       return counter 
+    
+
+# print distinct_prime_factors()
+
+
+# start_problem(48)
+# def self_power(num):
+#   return str(sum([ele**ele for ele in xrange(1,num+1)]))[-10:]
+
+# print self_power(1000)
+
 start_problem(49)
-start_problem(50)
+def prime_permutations():
+  primes = sieve(10000)
+  for index, prime in enumerate(primes):
+    if prime > 999:
+      lowest_index = index     
+      break
+  four_digit_primes = primes[lowest_index:len(primes)]
+  def permutation(string_eles):
+    def create_string(string, index):
+      result = ''
+      for i, ele in enumerate(string):
+        if i != index:
+          result += ele 
+      return result
+    
+    if len(string_eles) == 1:
+      return string_eles
+    
+    results = []
+    for i, element in enumerate(string_eles):
+      for perm in permutation(create_string(string_eles, i)):
+        results.append(element + perm)
+    return results
+
+  for ele in four_digit_primes:
+    perms = map( lambda ele : int(ele), permutation(str(ele)) )
+    for num in perms:
+      if num == ele or num not in four_digit_primes or (num - ele) != 3330 or ele == 1487 :
+        continue 
+      if (2*num) - ele in four_digit_primes:
+        return str(ele) + str(num) + str((2*num) - ele)
 
 
+print prime_permutations()
+
+# start_problem(50)
+
+# def consecutive_prime_sum():
+#   primes = sieve(1000000)
+
+#   def largest_sum(index):
+#     add = 0    
+#     counter = 0
+#     while add< 1000000:
+#       if add in primes: 
+#         num_of_primes = counter
+#         largest_prime = add
+#       add += primes[index]
+#       index += 1
+#       counter += 1
+#     return [num_of_primes, largest_prime]
+
+#   maxx = 0
+#   for ele in range(1,20):
+#     print largest_sum(ele)
+#     new_max = max(maxx, largest_sum(ele)[0] )
+#     if new_max > maxx:
+#       maxx = new_max      
+#       result = largest_sum(ele)[1]
+#   return result
+
+# print consecutive_prime_sum()
 
 
 
