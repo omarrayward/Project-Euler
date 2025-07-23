@@ -926,21 +926,6 @@ pentagon_numbers()
 
 
 @timer
-def pentagon_numbers_old():
-    pentagonal = lambda num: num*(3*num-1)/2
-    pent_list = [pentagonal(num) for num in range(1,3001)]
-    result = 100000000
-    for index, num1 in enumerate(pent_list):
-        for num2 in pent_list[index:]:
-            add = num1+num2
-            diff = abs(num2-num1)
-            if add in pent_list and diff in pent_list:
-                result = min(result, diff) 
-    return result
-
-pentagon_numbers_old()
-
-@timer
 def triang_pent_hex():
     def is_pentagonal(n):
         # Check if n is pentagonal: n = k(3k-1)/2
