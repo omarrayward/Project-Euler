@@ -39,7 +39,7 @@ def largest_prime_factor(num):
     result = None
     iter_num = 2
     while iter_num < num+1:
-        while num % iter_num is 0:
+        while num % iter_num == 0:
             result = iter_num
             num /= iter_num
         iter_num += 1    
@@ -115,10 +115,10 @@ def largest_grid_prod(num_string):
     all_nums = num_string.split()
     result = 0
     for i in range(0, len(all_nums)):
-        right = [all_nums[ele] for ele in range(i, i+3) if i//20 is (i+3)//20]
+        right = [all_nums[ele] for ele in range(i, i+3) if i//20 == (i+3)//20]
         down  = [all_nums[ele] for ele in [i, i + 20, i + 40, i + 60] if i+60 < 399]
-        diag1  = [all_nums[ele] for ele in [i, i + 21, i + 42, i+ 63] if i+ 63 < 399 and (i+ 21)//20 is (i//20) + 1 and (i+ 42)//20 is (i//20) + 2 and (i+ 63)//20 is (i//20) + 3  ]
-        diag2  = (all_nums[ele] for ele in [i, i + 19, i + 38, i+ 57] if i+ 63 < 399 and (i+ 19)//20 is (i//20) + 1 and (i+ 38)//20 is (i//20) + 2 and (i+ 57)//20 is (i//20) + 3  )
+        diag1  = [all_nums[ele] for ele in [i, i + 21, i + 42, i+ 63] if i+ 63 < 399 and (i+ 21)//20 == (i//20) + 1 and (i+ 42)//20 == (i//20) + 2 and (i+ 63)//20 == (i//20) + 3  ]
+        diag2  = (all_nums[ele] for ele in [i, i + 19, i + 38, i+ 57] if i+ 63 < 399 and (i+ 19)//20 == (i//20) + 1 and (i+ 38)//20 == (i//20) + 2 and (i+ 57)//20 == (i//20) + 3  )
         result = max(result,  reduce(lambda memo, ele: memo* int(ele), right, 1 ))  if right else result
         result = max(result,  reduce(lambda memo, ele: memo* int(ele), down, 1 ))  if down else result
         result = max(result,  reduce(lambda memo, ele: memo* int(ele), diag1, 1 ))  if diag1 else result
@@ -403,11 +403,11 @@ def counting_sundays():
     total_days = 366
     for year in range(1901,2001):
         for i, days in enumerate(days_in_month):
-            num_sundays = num_sundays + 1 if total_days%7 is 0 else num_sundays
+            num_sundays = num_sundays + 1 if total_days%7 == 0 else num_sundays
             total_days += days
-            if i is 1 and year%400 is 0:
+            if i == 1 and year%400 == 0:
                 total_days += 1
-            elif i is 1 and year%4 == 0 and year%100 != 0:
+            elif i == 1 and year%4 == 0 and year%100 != 0:
                 total_days +=1
 
     return num_sundays
@@ -429,7 +429,7 @@ def amicable_numbers(num):
     def sum_of_divisors(n):
         div = []
         for num in range(1,int(math.sqrt(n)) ):
-            if n%num is 0:
+            if n%num == 0:
                 div.append(num)
                 if num*num != n and num != 1:
                     div.append(n/num)
@@ -461,7 +461,7 @@ def sum_non_abundant():
     def sum_of_divisors(n):
         div = []
         for num in range(1,int(math.sqrt(n))+1 ):
-            if n%num is 0:
+            if n%num == 0:
                 div.append(num)
                 if num*num != n and num != 1:
                     div.append(n/num)
@@ -581,7 +581,7 @@ start_problem(30)
 def digit_five_powers():
     def is_sum_of_fifth_power(num):
         return num == reduce( lambda memo, ele : memo + int(ele)**5, str(num), 0 ) 
-    #upper limit is Math.pow(9,5)*6 => There is no 6 dig number with a bigger sum_power than this
+    #upper limit == Math.pow(9,5)*6 => There == no 6 dig number with a bigger sum_power than this
     return reduce( lambda memo, ele : memo + ele if is_sum_of_fifth_power(ele) else memo, range(2,354294), 0 )
 
 print(digit_five_powers())
@@ -682,7 +682,7 @@ print(circular_primes(1000000))
 start_problem(36)
 
 def dobule_base_palindrome(num):  
-    return reduce( lambda memo, ele: memo + ele if str(ele) == str(ele)[::-1] and bin(ele)[2:] == bin(ele)[2:][::-1] else memo,  xrange(0,num), 0)
+    return reduce( lambda memo, ele: memo + ele if str(ele) == str(ele)[::-1] and bin(ele)[2:] == bin(ele)[2:][::-1] else memo,  range(0,num), 0)
 
 print(dobule_base_palindrome(1000000))
 
@@ -817,13 +817,13 @@ def sub_string_divisibility():
                 result.append(new_string)
         return result
 
-    div_2 = lambda string: int(string[1:4])%2 is 0
-    div_3 = lambda string: int(string[2:5])%3 is 0
-    div_5 = lambda string: int(string[3:6])%5 is 0
-    div_7 = lambda string: int(string[4:7])%7 is 0
-    div_11 = lambda string: int(string[5:8])%11 is 0
-    div_13 = lambda string: int(string[6:9])%13 is 0
-    div_17 = lambda string: int(string[7:10])%17 is 0
+    div_2 = lambda string: int(string[1:4])%2 == 0
+    div_3 = lambda string: int(string[2:5])%3 == 0
+    div_5 = lambda string: int(string[3:6])%5 == 0
+    div_7 = lambda string: int(string[4:7])%7 == 0
+    div_11 = lambda string: int(string[5:8])%11 == 0
+    div_13 = lambda string: int(string[6:9])%13 == 0
+    div_17 = lambda string: int(string[7:10])%17 == 0
 
     return reduce(lambda memo, ele: memo + int(ele) if div_2(ele) and div_3(ele) and div_5(ele) and div_7(ele) and div_11(ele) and div_13(ele) and div_17(ele) else memo, combination('0123456789'), 0 )
 
