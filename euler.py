@@ -30,7 +30,7 @@ def sum_even_fib_to_4_mill():
         prev, next = fib_generator(prev, next) 
     return sum
 
-print sum_even_fib_to_4_mill()
+print(sum_even_fib_to_4_mill())
 
 start_problem(3)
 def largest_prime_factor(num):
@@ -65,21 +65,21 @@ def smallest_multiple(num):
         result *= num
     return result
 
-print smallest_multiple(20)
+print(smallest_multiple(20))
 
 
 start_problem(6)
 def sum_square_diff(num):
     return sum(range(1,num+1)) ** 2 - sum(ele ** 2 for ele in range(1,num+1)) 
 
-print sum_square_diff(100)
+print(sum_square_diff(100))
 
 start_problem(7)
 def nth_prime(num):
     primes = sieve(1000000)
     return primes[num-1]
 
-print nth_prime(10001)
+print(nth_prime(10001))
 
 start_problem(8)
 def largest_product(num):
@@ -100,13 +100,13 @@ def pithahorean_triplet():
             if a+b+c == 1000:
                 return int(a*b*c)
 
-print pithahorean_triplet()
+print(pithahorean_triplet())
 
 start_problem(10)
 def sum_primes(num):
     return sum(sieve(num))
 
-print sum_primes(2000000)
+print(sum_primes(2000000))
 
 start_problem(11)
 def largest_grid_prod(num_string):
@@ -124,7 +124,7 @@ def largest_grid_prod(num_string):
     return result
 
 
-print largest_grid_prod("08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08\
+print(largest_grid_prod("08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08\
                         49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00\
                         81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65\
                         52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91\
@@ -163,13 +163,13 @@ def divisible_triangle_number(num):
 
     return triangle_num
 
-print divisible_triangle_number(500)
+print(divisible_triangle_number(500))
 
 start_problem(13)
 def first_ten_digs(*args):
     return str(sum(args))[:10]
 
-print first_ten_digs(37107287533902102798797998220837590246510135740250,
+print(first_ten_digs(37107287533902102798797998220837590246510135740250,
                       46376937677490009712648124896970078050417018260538,
                       74324986199524741059474233309513058123726617309629,
                       91942213363574161572522430563301811072406154908250,
@@ -297,13 +297,13 @@ def lattice_paths(num):
         return memo[k]
     return lattice(num, num)
 
-print lattice_paths(20)
+print(lattice_paths(20))
 
 start_problem(16)
 def power_dig_sum(num):
     return reduce(lambda memo, ele: memo + int (ele), iter(str(2**num)), 0)
 
-print power_dig_sum(1000)
+print(power_dig_sum(1000))
 
 start_problem(17)
 import math
@@ -356,7 +356,7 @@ def num_letters_count(num):
             num_string += one_dig[n]
         return num_string
 
-    return reduce(lambda memo, ele: memo + len(num_to_sting(ele).replace(' ', '') ), xrange(1,num+1), 0 )
+        return reduce(lambda memo, ele: memo + len(num_to_sting(ele).replace(' ', '') ), range(1,num+1), 0 )
 
 print(num_letters_count(1000))
 
@@ -377,7 +377,7 @@ def max_path_sum(tree):
     depth_tree(tree, [0,0], 0)
     return result['data']
 
-print max_path_sum("75,\
+print(max_path_sum("75,\
                     95 64,\
                     17 47 82,\
                     18 35 87 10,\
@@ -411,14 +411,14 @@ def counting_sundays():
     return num_sundays
 
 
-print counting_sundays()
+print(counting_sundays())
 
 start_problem(20)
 import math
 def factorial_dig_sum(num):
     return reduce(lambda memo, ele: memo+ int(ele), str(math.factorial(num)), 0)
 
-print factorial_dig_sum(100)
+print(factorial_dig_sum(100))
 
 start_problem(21)
 import math
