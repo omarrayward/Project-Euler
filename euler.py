@@ -1,9 +1,24 @@
+import time
+from functools import reduce, wraps
+
+def timer(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        execution_time = end_time - start_time
+        print(f"{func.__name__} took {execution_time:.4f} seconds to execute")
+        return result
+    return wrapper
+
 # -*- coding: utf-8 -*-
 from functools import reduce
 
 def start_problem(num):
     print("\nEuler %d \n" % num)
 
+@timer
 def sieve(num):
     primes = [True] * (num + 1)
     for i in range(2, num + 1):
@@ -15,7 +30,7 @@ print(sieve(100))
 
 start_problem(1)
 def multiples_3_and_5(num):
-    return reduce(lambda memo, ele: memo + ele  if ele%3 == 0 or ele%5 == 0 else memo , range(1,num), 0 )
+    return reduce(lambda memo, ele: memo + ele if ele%3 == 0 or ele%5 == 0 else memo, range(1,num), 0)
 
 print(multiples_3_and_5(1000))
 
@@ -278,9 +293,9 @@ def longest_collatz(num):
     collatz[1] = 1
     def collatz_count(num):
         if num >= len(collatz):
-            return 1 + collatz_count(num/2) if num%2 == 0 else 1 + collatz_count( (3*num) +1)
+            return 1 + collatz_count(num//2) if num%2 == 0 else 1 + collatz_count( (3*num) +1)
         if not collatz[num]:      
-            collatz[num] = 1 + collatz_count(num/2) if num%2 == 0 else 1 + collatz_count( (3*num) +1)
+            collatz[num] = 1 + collatz_count(num//2) if num%2 == 0 else 1 + collatz_count( (3*num) +1)
         return collatz[num]
     return max(range(1,num), key=collatz_count)
 
